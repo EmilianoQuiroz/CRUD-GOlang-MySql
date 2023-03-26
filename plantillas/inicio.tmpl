@@ -1,37 +1,25 @@
-{{ define "inicio"}}
-<!doctype html>
-<html lang="en">
-  <head>
-    <title>Title</title>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+{{ define "inicio" }}
+{{ template "cabecera" }}
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>Santiago Quiroz</td>
+            <td> santiagoquiroz.dev@gmail.com</td>
+            <td>Editar | Borrar</td>
+          </tr>
+         
+        </tbody>
+      </table>
 
-    <table class="table">
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Nombre</th>
-          <th>Correo</th>
-          <th>Acciones</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>1</td>
-          <td>Santiago Quiroz</td>
-          <td> santiagoquiroz.dev@gmail.com</td>
-          <td>Editar | Borrar</td>
-        </tr>
-       
-      </tbody>
-    </table>
-  </head>
-  <body>
-  
-  </body>
-</html>
-{{end}}
+{{ template "pie" }}
+{{end }}

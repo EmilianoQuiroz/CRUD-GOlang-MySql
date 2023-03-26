@@ -42,6 +42,8 @@ func main() {
 	http.HandleFunc("/borrar", Borrar)
 	// Solicitud para editar la informacion
 	http.HandleFunc("/editar", Editar)
+	// Solicitud para actualizar los datos
+	http.HandleFunc("/actualizar", Actualizar)
 
 	// Log que indica por consola que el servidor esta corriendo 
 	log.Println("Servidor corriendo...")
@@ -168,6 +170,31 @@ func Insertar(w http.ResponseWriter, r *http.Request){
 	// Ejecutamos la variable incertarRegistros con el metodo Exec
 	// Pasamos como parametros el nombre y el correo
 	insertarRegistros.Exec(nombre,correo)
+
+	http.Redirect(w,r,"/",301)
+	}
+}
+
+// Funcion para la actualizacion de datos
+func Actualizar(w http.ResponseWriter, r *http.Request){
+	if r.Method=="POST"{ // Si existe un metodo POST
+		// Entonces vamos a recepcionar esos datos
+		id:= r.FormValue("id")
+		nombre:= r.FormValue("nombre")
+		correo:= r.FormValue("correo")
+
+	// Conexion con la base de datos
+	conexionEstablecida:= conexionBD()
+	// Query para actualizar registros en la tabla
+	modificarRegistros,err:= conexionEstablecida.Prepare("UPDATE empleados SET nombre=?,correo=? WHERE id=?")
+
+	// Para ejecutar la variable insertarRegistros, primero hay que asegurarse de que no exista error
+	if err!=nil { // Si se produce un error ejecutamos el panic
+		panic(err.Error())
+	}
+	// Ejecutamos la variable incertarRegistros con el metodo Exec
+	// Pasamos como parametros el nombre, el correo y el id
+	modificarRegistros.Exec(nombre,correo,id)
 
 	http.Redirect(w,r,"/",301)
 	}

@@ -9,10 +9,9 @@
         <form method="post" action="/actualizar">
 
             <!-- Inoput para el Id -->
-            <div class="form-group">
-                <label class="sr-only" for="inputName">Id de registro</label>
-                <input type="text" value={{.Id}} class="form-control" name="inputName" id="inputName" placeholder="">
-            </div>
+
+                <input type="hidden" value={{.Id}} class="form-control" name="id" id="id" placeholder="">
+
 
             <!-- Input para el nombre -->
             <div class="form-group">
@@ -29,9 +28,13 @@
               <small id="emailHelpId" class="form-text text-muted">Escribe tu correo</small>
 
             </div>
+            
             <!-- Boton de agregar nuevo empledo-->
-            <button type="submit" class="btn btn-primary">Guardar cambios</button>
-        </form>
+            <button type="submit" class="btn btn-success">Guardar cambios</button>
+            
+          <!-- Boton de cancelar -->
+          <a name="" id="" class="btn btn-danger" href="/" role="button">Cancelar</a>
+          </form>
     </div>
 
 </div>

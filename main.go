@@ -38,13 +38,20 @@ func main() {
 	http.HandleFunc("/crear", Crear)
 	// Solicitud para incertar los datos
 	http.HandleFunc("/insertar", Insertar)
-
+	// Solicitud para borrar datos
+	http.HandleFunc("/borrar", Borrar)
 
 
 	// Log que indica por consola que el servidor esta corriendo 
 	log.Println("Servidor corriendo...")
 	// Indicamos el servidor en el que estara corriendo la aplicacion
 	http.ListenAndServe(":8080", nil)
+}
+
+// Funcion para borrar datos
+func Borrar(w http.ResponseWriter, r *http.Request){
+	idEmpleado:= r.URL.Query().Get("id")
+	fmt.Println(idEmpleado)
 }
 
 // Estructura para depositar los datos de los empleados
@@ -83,7 +90,7 @@ func Inicio(w http.ResponseWriter, r *http.Request){
 
 		arregloEmpleado=append(arregloEmpleado, empleado)
 	}
-	fmt.Println(arregloEmpleado)
+	//fmt.Println(arregloEmpleado)
 
 	//fmt.Fprintf(w,"Hola Go")
 	// Accedemos al contenido de la plantilla inicio

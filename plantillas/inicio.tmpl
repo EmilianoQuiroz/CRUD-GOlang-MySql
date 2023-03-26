@@ -17,7 +17,10 @@
             <td>{{.Id}}</td>
             <td>{{.Nombre}}</td>
             <td> {{.Correo}}</td>
-            <td>Editar {{.Id}} | 
+            <td>
+              <!-- Boton de editar datos -->
+              <a name="" id="" class="btn btn-info" href="/editar?id={{.Id}}" role="button">Editar</a>
+             | 
               <!-- Boton de borrar datos -->
               <a name="" id="" class="btn btn-danger" href="/borrar?id={{.Id}}" role="button">Borrar</a>
             

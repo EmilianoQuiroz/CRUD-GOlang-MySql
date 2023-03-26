@@ -40,7 +40,8 @@ func main() {
 	http.HandleFunc("/insertar", Insertar)
 	// Solicitud para borrar datos
 	http.HandleFunc("/borrar", Borrar)
-
+	// Solicitud para editar la informacion
+	http.HandleFunc("/editar", Editar)
 
 	// Log que indica por consola que el servidor esta corriendo 
 	log.Println("Servidor corriendo...")
@@ -111,6 +112,34 @@ func Inicio(w http.ResponseWriter, r *http.Request){
 	//fmt.Fprintf(w,"Hola Go")
 	// Accedemos al contenido de la plantilla inicio
 	plantillas.ExecuteTemplate(w, "inicio", arregloEmpleado)
+}
+
+// Funcion para editar datos
+func Editar(w http.ResponseWriter, r *http.Request){
+	
+	idEmpleado:= r.URL.Query().Get("id")
+	fmt.Println(idEmpleado)
+
+	// Conexion con la base de datos
+	conexionEstablecida:= conexionBD()
+	registro,err:= conexionEstablecida.Query("SELECT * FROM empleados WHERE id =?", idEmpleado)
+
+	empleado:= Empleado{}
+	for registro.Next(){
+		var id int
+		var nombre, correo string
+		err= registro.Scan(&id,&nombre,&correo)
+
+		if err != nil {
+			panic(err.Error())
+		}
+		empleado.Id= id
+		empleado.Nombre= nombre
+		empleado.Correo= correo
+
+	}
+	// Imprimimos los datos del registro
+	fmt.Println(empleado)
 }
 
 // Funcion para mostrar la plantilla de crear

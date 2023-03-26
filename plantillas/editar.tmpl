@@ -1,0 +1,39 @@
+{{ define "editar" }}
+{{ template "cabecera" }}
+<div class="card">
+    <div class="card-header">
+        Empleados
+    </div>
+    <div class="card-body">
+        <!-- Formulario para el ingreso de datos -->
+        <form method="post" action="/actualizar">
+
+            <!-- Inoput para el Id -->
+            <div class="form-group">
+                <label class="sr-only" for="inputName">Id de registro</label>
+                <input type="text" value={{.Id}} class="form-control" name="inputName" id="inputName" placeholder="">
+            </div>
+
+            <!-- Input para el nombre -->
+            <div class="form-group">
+              <label for="">Nombre:</label>
+              <input type="text"
+                class="form-control" name="nombre" value={{.Nombre}} id="nombre" aria-describedby="helpId" placeholder="">
+              <small id="helpId" class="form-text text-muted">Escribe tu nombre</small>
+            </div>
+
+            <!-- Email del formulario-->
+            <div class="form-group">
+              <label for="">Correo:</label>
+              <input type="email" class="form-control" value={{.Correo}} name="correo" id="correo" aria-describedby="emailHelpId" placeholder="">
+              <small id="emailHelpId" class="form-text text-muted">Escribe tu correo</small>
+
+            </div>
+            <!-- Boton de agregar nuevo empledo-->
+            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+        </form>
+    </div>
+
+</div>
+{{ template "pie" }}
+{{ end }}

@@ -140,6 +140,7 @@ func Editar(w http.ResponseWriter, r *http.Request){
 	}
 	// Imprimimos los datos del registro
 	fmt.Println(empleado)
+	plantillas.ExecuteTemplate(w,"editar",empleado)
 }
 
 // Funcion para mostrar la plantilla de crear

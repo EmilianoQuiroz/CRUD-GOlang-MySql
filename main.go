@@ -34,7 +34,12 @@ func main() {
 	http.HandleFunc("/", Inicio)
 	// Solicitud para mostrar la plantilla crear
 	http.HandleFunc("/crear", Crear)
-	// Log que indica por consola que el servidor esta corriendo
+	// Solicitud para incertar los datos
+	http.HandleFunc("/insertar", Insertar)
+
+
+
+	// Log que indica por consola que el servidor esta corriendo 
 	log.Println("Servidor corriendo...")
 	// Indicamos el servidor en el que estara corriendo la aplicacion
 	http.ListenAndServe(":8080", nil)
@@ -43,7 +48,7 @@ func main() {
 // Funcion para mostrar la plantilla de Inicio
 func Inicio(w http.ResponseWriter, r *http.Request){
 
-	// Prueba de conexion con la base de datos
+	// Conexion con la base de datos
 	conexionEstablecida:= conexionBD()
 	insertarRegistros,err:= conexionEstablecida.Prepare("INSERT INTO empleados(nombre,correo) VALUES('Santiago','correo@gmail.com')")
 
@@ -64,4 +69,27 @@ func Inicio(w http.ResponseWriter, r *http.Request){
 func Crear(w http.ResponseWriter, r *http.Request){
 	// Accedemos al contenido de la plantilla crear
 	plantillas.ExecuteTemplate(w, "crear", nil)
+}
+
+// Funcion para la recepcion de datos
+func Insertar(w http.ResponseWriter, r *http.Request){
+	if r.Method=="POST"{ // Si existe un metodo POST
+		// Entonces vamos a recepcionar esos datos
+		nombre:= r.FormValue("nombre")
+		correo:= r.FormValue("correo")
+
+	// Conexion con la base de datos
+	conexionEstablecida:= conexionBD()
+	insertarRegistros,err:= conexionEstablecida.Prepare("INSERT INTO empleados(nombre,correo) VALUES(?,?)")
+
+	// Para ejecutar la variable insertarRegistros, primero hay que asegurarse de que no exista error
+	if err!=nil { // Si se produce un error ejecutamos el panic
+		panic(err.Error())
+	}
+	// Ejecutamos la variable incertarRegistros con el metodo Exec
+	// Pasamos como parametros el nombre y el correo
+	insertarRegistros.Exec(nombre,correo)
+
+	http.Redirect(w,r,"/",301)
+	}
 }

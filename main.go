@@ -1,12 +1,14 @@
 package main
 
 import (
-	"database/sql"		// Modulo necesario para trabajar con sql
-	"net/http" 			// Permite construir servidores HTTP 
-	"log" 	   			// Nos permite crear diferentes tipos de loggers, usando el método New
+	"database/sql" // Modulo necesario para trabajar con sql
+	"fmt"
+	"log"      // Nos permite crear diferentes tipos de loggers, usando el método New
+	"net/http" // Permite construir servidores HTTP
 	//"fmt" 	   		// Formato de entrada y salida de datos
-	"text/template" 	// Para trabajar con templates
-	_"github.com/go-sql-driver/mysql" // Driver para la coneccion con la base de datos 
+	"text/template" // Para trabajar con templates
+
+	_ "github.com/go-sql-driver/mysql" // Driver para la coneccion con la base de datos
 )
 
 // Funcion para conectar con la base de datos
@@ -45,20 +47,43 @@ func main() {
 	http.ListenAndServe(":8080", nil)
 }
 
+// Estructura para depositar los datos de los empleados
+type Empleado struct {
+	Id int
+	Nombre string
+	Correo string
+}
+
 // Funcion para mostrar la plantilla de Inicio
 func Inicio(w http.ResponseWriter, r *http.Request){
 
 	// Conexion con la base de datos
 	conexionEstablecida:= conexionBD()
-	insertarRegistros,err:= conexionEstablecida.Prepare("INSERT INTO empleados(nombre,correo) VALUES('Santiago','correo@gmail.com')")
+	registros,err:= conexionEstablecida.Query("SELECT * FROM empleados")
 
 	// Para ejecutar la variable insertarRegistros, primero hay que asegurarse de que no exista error
 	if err!=nil { // Si se produce un error ejecutamos el panic
 		panic(err.Error())
 	}
-	// Ejecutamos la variable incertarRegistros con el metodo Exec
-	insertarRegistros.Exec()
 
+	empleado:= Empleado{}
+	arregloEmpleado:=[]Empleado{}
+
+	for registros.Next(){
+		var id int
+		var nombre, correo string
+		err= registros.Scan(&id,&nombre,&correo)
+
+		if err != nil {
+			panic(err.Error())
+		}
+		empleado.Id= id
+		empleado.Nombre= nombre
+		empleado.Correo= correo
+
+		arregloEmpleado=append(arregloEmpleado, empleado)
+	}
+	fmt.Println(arregloEmpleado)
 
 	//fmt.Fprintf(w,"Hola Go")
 	// Accedemos al contenido de la plantilla inicio

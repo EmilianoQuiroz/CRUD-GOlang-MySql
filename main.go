@@ -87,7 +87,7 @@ func Inicio(w http.ResponseWriter, r *http.Request){
 
 	//fmt.Fprintf(w,"Hola Go")
 	// Accedemos al contenido de la plantilla inicio
-	plantillas.ExecuteTemplate(w, "inicio", nil)
+	plantillas.ExecuteTemplate(w, "inicio", arregloEmpleado)
 }
 
 // Funcion para mostrar la plantilla de crear

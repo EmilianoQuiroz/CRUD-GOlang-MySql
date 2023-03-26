@@ -52,6 +52,22 @@ func main() {
 func Borrar(w http.ResponseWriter, r *http.Request){
 	idEmpleado:= r.URL.Query().Get("id")
 	fmt.Println(idEmpleado)
+
+	// Conexion con la base de datos
+	conexionEstablecida:= conexionBD()
+
+	// Query para borrar registros de la tabla 
+	borrarRegistro,err:= conexionEstablecida.Prepare("DELETE FROM empleados WHERE id=?")
+
+	// Para ejecutar la variable insertarRegistros, primero hay que asegurarse de que no exista error
+	if err!=nil { // Si se produce un error ejecutamos el panic
+		panic(err.Error())
+	}
+	// Ejecutamos la variable incertarRegistros con el metodo Exec
+	// Pasamos como parametro el idEmpleado
+	borrarRegistro.Exec(idEmpleado)
+
+	http.Redirect(w,r,"/",301)
 }
 
 // Estructura para depositar los datos de los empleados
@@ -112,6 +128,7 @@ func Insertar(w http.ResponseWriter, r *http.Request){
 
 	// Conexion con la base de datos
 	conexionEstablecida:= conexionBD()
+	// Query para insertar registros en la tabla
 	insertarRegistros,err:= conexionEstablecida.Prepare("INSERT INTO empleados(nombre,correo) VALUES(?,?)")
 
 	// Para ejecutar la variable insertarRegistros, primero hay que asegurarse de que no exista error

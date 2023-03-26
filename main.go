@@ -1,10 +1,11 @@
 package main
 
 import (
-	"net/http" 		// Permite construir servidores HTTP 
-	"log" 	   		// Nos permite crear diferentes tipos de loggers, usando el método New
+	"net/http" 			// Permite construir servidores HTTP 
+	"log" 	   			// Nos permite crear diferentes tipos de loggers, usando el método New
 	//"fmt" 	   		// Formato de entrada y salida de datos
-	"text/template" // Para trabajar con templates
+	"text/template" 	// Para trabajar con templates
+	_"github.com/go-sql-driver/mysql" // Driver para la coneccion con la base de datos 
 )
 // Llamado a nuestro template
 var plantillas = template.Must(template.ParseGlob("plantillas/*"))

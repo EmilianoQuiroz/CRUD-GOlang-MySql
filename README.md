@@ -1,6 +1,6 @@
 # CRUD-GOlang-MySql
 
-![image](https://user-images.githubusercontent.com/78452543/218143447-299c3b96-e517-4f7d-8fe6-7c8686d05e84.png)
+![image](https://user-images.githubusercontent.com/78452543/227827924-0c7dd2bd-8089-4118-8528-3afbd4178377.png)
 
 Aplicacion de registro en la que se pueden agregar, editar o eliminar empleados tipo CRUD con GOlang y MySql.
 

@@ -1,5 +1,6 @@
 {{ define "editar" }}
 {{ template "cabecera" }}
+<br/><br/>
 <div class="card">
     <div class="card-header">
         Empleados
@@ -8,7 +9,7 @@
         <!-- Formulario para el ingreso de datos -->
         <form method="post" action="/actualizar">
 
-            <!-- Inoput para el Id -->
+            <!-- Input para el Id -->
 
                 <input type="hidden" value={{.Id}} class="form-control" name="id" id="id" placeholder="">
 

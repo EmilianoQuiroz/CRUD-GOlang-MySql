@@ -1,26 +1,29 @@
 {{ define "cabecera" }}
 <!doctype html>
-<html lang="en">
+<html lang="es">
   <head>
     <!-- Cabecera de la app-->
-    <title>Registro de empleados</title>
+    <title>Gestion de empleados</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
+    <!-- Iconos de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
   </head>
   <body>
     <!-- Menu de navegacion -->
-    <nav class="navbar navbar-expand navbar-light bg-light">
+    <nav class="navbar navbar-expand navbar-dark bg-dark">
         <div class="nav navbar-nav">
-            <a class="nav-item nav-link active" href="/">Sistema</a>
-            <a class="nav-item nav-link" href="/crear">Crear nuevo empleado</a>
+            <a class="nav-item nav-link active" href="/">Gestion de empleados</a>
+            <a class="nav-item nav-link" href="/crear">Agregar empleado</a>
         </div>
     </nav>
     <!-- Fin del menu de navegacion -->
-    <div class="container">
+    <div class="container" style="min-height: calc(100vh - 40px - 414px);">
 
     
 {{ end }}
